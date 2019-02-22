@@ -23,6 +23,7 @@ function Building(name, floor) {
 let building = new Building('Villa', 5);
 console.log(building);
 
+
 function House(name, floor, flats) {
     Building.call(this, name, floor);
     this.flatsOnFloor = flats;
@@ -37,3 +38,17 @@ function House(name, floor, flats) {
 let house = new House('apachi', 8, 10);
 console.log(house);
 console.log(house.flatsCount());
+
+function Mall(name, floor, shops){
+    Building.call(this, name, floor);
+    this.shopsOnFloor = shops;
+    this.shopsCount = function() {
+        return {
+            floors: this.floor,
+            totalShops: this.floor * this.shopsOnFloor
+        };
+    };
+}
+let skyMall = new Mall("Sky", 3, 20);
+console.log(skyMall);
+console.log(skyMall.shopsCount());

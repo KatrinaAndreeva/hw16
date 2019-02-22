@@ -6,3 +6,47 @@
 // конструктора.
 // У класса “Гость” должно быть свойство “срокДействия” (validDate, например), содержащее дату (например, одну неделю от момента регистрации).
 // У классов-наследников метод “получить информацию” должен так же содержать информацию о дополнительных свойствах (“суперАдмин” и “срокДействия”)
+
+let User = function(name) {
+    this.name = name;
+    this.dateOfReg = new Date();
+};
+User.prototype.getInfo = function() {
+   console.log(this.name, this.dateOfReg);
+};
+
+let Admin = function(name, sup) {
+    User.call(this, name);
+    this._superAdmin = sup;
+};
+
+Admin.prototype = Object.create(User.prototype);
+Admin.prototype.constructor = Admin;
+
+
+let administrator = new Admin('Kate', true);
+Admin.prototype.getInfo = function() {
+    User.prototype.getInfo.call(this);
+    console.log('SuperAdmin: ' + this._superAdmin);
+}.bind(administrator);
+
+console.log(administrator);
+
+let Guest = function(name) {
+    User.call(this, name);
+    this.validDate = this.dateOfReg + 604800000;
+};
+
+Guest.prototype = Object.create(Guest.prototype);
+Guest.prototype.constructor = Guest;
+
+let guest = new Guest('Petya');
+console.log(guest);
+
+Guest.prototype.getInfo = function() {
+    User.prototype.getInfo.call(this);
+    console.log('Valid till: ' + new Date(this.validDate));
+};
+
+console.log(guest);
+
