@@ -39,7 +39,7 @@ let house = new House('apachi', 8, 10);
 console.log(house);
 console.log(house.flatsCount());
 
-function Mall(name, floor, shops){
+function Mall(name, floor, shops) {
     Building.call(this, name, floor);
     this.shopsOnFloor = shops;
     this.shopsCount = function() {

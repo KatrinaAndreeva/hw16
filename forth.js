@@ -12,7 +12,7 @@ let User = function(name) {
     this.dateOfReg = new Date();
 };
 User.prototype.getInfo = function() {
-   console.log(this.name, this.dateOfReg);
+    console.log(this.name, this.dateOfReg);
 };
 
 let Admin = function(name, sup) {
@@ -34,7 +34,9 @@ console.log(administrator);
 
 let Guest = function(name) {
     User.call(this, name);
-    this.validDate = this.dateOfReg + 604800000;
+    let today = this.dateOfReg.getTime() + 604800000;
+    let inAWeek = new Date(today);
+    this.validDate = inAWeek;
 };
 
 Guest.prototype = Object.create(Guest.prototype);
@@ -49,4 +51,3 @@ Guest.prototype.getInfo = function() {
 };
 
 console.log(guest);
-
